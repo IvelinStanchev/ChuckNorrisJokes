@@ -37,7 +37,11 @@ public class RandomJokeFragment extends BaseFragment {
     TextView txtJoke;
     @BindView(R.id.friends_requests_loading_container_progress_bar)
     RotateLoading loadingProgressBar;
-    List<JokeResponseModel> previousJokes;
+    @BindView(R.id.txt_random_joke_previous)
+    TextView txtPrevious;
+
+    private List<JokeResponseModel> previousJokes;
+    private int currentDisplayedJokePosition;
 
     @Nullable
     @Override
@@ -62,13 +66,46 @@ public class RandomJokeFragment extends BaseFragment {
         fetchRandomJoke();
     }
 
-    @OnClick({ R.id.txt_random_joke_next })
+    @OnClick({ R.id.txt_random_joke_previous, R.id.txt_random_joke_next })
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.txt_random_joke_previous:
+                clickedPrevious();
+                break;
             case R.id.txt_random_joke_next:
-                fetchRandomJoke();
+                clickedNext();
                 break;
         }
+    }
+
+    private void clickedPrevious() {
+        if (currentDisplayedJokePosition > 0) {
+            currentDisplayedJokePosition--;
+            if (currentDisplayedJokePosition == 0) {
+                txtPrevious.setVisibility(View.GONE);
+            }
+            updateJokeText(previousJokes.get(currentDisplayedJokePosition).getJokeText());
+        }
+    }
+
+    private void clickedNext() {
+        if (previousJokes.size() <= 1) {
+            fetchRandomJoke();
+        } else {
+            if (currentDisplayedJokePosition < previousJokes.size() - 1) {
+                currentDisplayedJokePosition++;
+                if (currentDisplayedJokePosition >= 1) {
+                    txtPrevious.setVisibility(View.VISIBLE);
+                }
+                updateJokeText(previousJokes.get(currentDisplayedJokePosition).getJokeText());
+            } else {
+                fetchRandomJoke();
+            }
+        }
+    }
+
+    private void updateJokeText(String joke) {
+        txtJoke.setText("“" + joke + "“");
     }
 
     private void fetchRandomJoke() {
@@ -81,8 +118,12 @@ public class RandomJokeFragment extends BaseFragment {
                     loadingProgressBar.stop();
 
                     previousJokes.add(responseModel);
+                    currentDisplayedJokePosition = previousJokes.size() - 1;
+                    if (previousJokes.size() > 1) {
+                        txtPrevious.setVisibility(View.VISIBLE);
+                    }
 
-                    txtJoke.setText("“" + responseModel.getJokeText() + "“");
+                    updateJokeText(responseModel.getJokeText());
                 }
             }
 
