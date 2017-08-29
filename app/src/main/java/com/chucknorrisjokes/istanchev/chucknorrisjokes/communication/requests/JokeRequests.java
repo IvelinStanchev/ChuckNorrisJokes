@@ -24,9 +24,9 @@ public class JokeRequests {
         this.context = context;
     }
 
-    public void getRandomJoke(final ServiceCallback<JokeResponseModel> responseCallback){
+    public void getRandomJoke(String category, final ServiceCallback<JokeResponseModel> responseCallback){
 
-        ApiRequests.getRandomJoke(context, new ServiceCallback<JokeResponseModel>() {
+        ApiRequests.getRandomJoke(context, category, new ServiceCallback<JokeResponseModel>() {
             @Override
             public void success(JokeResponseModel responseModel, String rawJsonResponse,
                                 Call<JokeResponseModel> callRetrofit, Response<JokeResponseModel> responseRetrofit) {

@@ -15,9 +15,11 @@ import java.util.List;
 
 public class ApiRequests {
 
-    public static void getRandomJoke(Context context, ServiceCallback<JokeResponseModel> callback) {
+    public static void getRandomJoke(Context context, String category, ServiceCallback<JokeResponseModel> callback) {
+        String endpoint = ApiConsts.getRandomJokeEndpoint(category);
+
         ServiceHelper.getInstance(context).createAsynchronousRequest(RestClientHelper.getClient(context)
-                .getRandomJoke(), callback);
+                .getRandomJoke(endpoint), callback);
     }
 
     public static void getCategories(Context context, ServiceCallback<List<String>> callback) {

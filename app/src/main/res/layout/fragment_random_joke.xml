@@ -10,7 +10,6 @@
         android:id="@+id/rl_random_joke_chosen_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_random_joke_text_search_container"
         android:visibility="gone">
 
         <TextView
@@ -63,7 +62,22 @@
         android:id="@+id/rl_random_joke_joke_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_random_joke">
+        android:layout_below="@+id/txt_random_joke"
+        android:background="@drawable/left_right_background_borders">
+
+        <TextView
+            android:id="@+id/txt_random_joke_joke_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/jokeColor"
+            android:textSize="16sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:scrollbars="vertical"
+            android:textStyle="italic"
+            android:visibility="gone"/>
 
         <TextView
             fontPath="fonts/ComicSansMSFont.ttf"
@@ -71,15 +85,14 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
             android:textColor="@color/jokeColor"
             android:textSize="20sp"
-            android:background="@drawable/left_right_background_borders"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:scrollbars="vertical"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:layout_below="@+id/txt_random_joke_joke_category"/>
 
         <com.victor.loading.rotate.RotateLoading
             android:id="@+id/random_joke_loading_container_progress_bar"

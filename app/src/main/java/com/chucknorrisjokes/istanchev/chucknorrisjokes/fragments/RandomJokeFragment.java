@@ -44,6 +44,8 @@ public class RandomJokeFragment extends BaseFragment {
     RelativeLayout categoryContainer;
     @BindView(R.id.txt_random_joke_category)
     TextView txtCategory;
+    @BindView(R.id.txt_random_joke_joke_category)
+    TextView txtJokeCategory;
 
     private List<JokeResponseModel> previousJokes;
     private int currentDisplayedJokePosition = -1;
@@ -71,14 +73,14 @@ public class RandomJokeFragment extends BaseFragment {
             previousJokes = new ArrayList<>();
             fetchRandomJoke();
         } else if (currentDisplayedJokePosition > -1) {
-            updateJokeText(previousJokes.get(currentDisplayedJokePosition).getJokeText());
+            updateJokeText(previousJokes.get(currentDisplayedJokePosition));
         }
 
         updateCategoryView();
     }
 
     @OnClick({ R.id.txt_random_joke_previous, R.id.txt_random_joke_next,
-                R.id.txt_random_joke_categories })
+                R.id.txt_random_joke_categories, R.id.txt_random_joke_category_remove })
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.txt_random_joke_previous:
@@ -89,6 +91,10 @@ public class RandomJokeFragment extends BaseFragment {
                 break;
             case R.id.txt_random_joke_categories:
                 showFragmentAndAddToBackStack(new CategoriesFragment(), "CategoriesFragment", R.id.main_activity_fragments_container);
+                break;
+            case R.id.txt_random_joke_category_remove:
+                chosenCategory = null;
+                updateCategoryView();
                 break;
         }
     }
@@ -121,7 +127,7 @@ public class RandomJokeFragment extends BaseFragment {
         if (currentDisplayedJokePosition > 0) {
             currentDisplayedJokePosition--;
             updateNextAndPreviousButtons();
-            updateJokeText(previousJokes.get(currentDisplayedJokePosition).getJokeText());
+            updateJokeText(previousJokes.get(currentDisplayedJokePosition));
         }
     }
 
@@ -132,20 +138,29 @@ public class RandomJokeFragment extends BaseFragment {
             if (currentDisplayedJokePosition < previousJokes.size() - 1) {
                 currentDisplayedJokePosition++;
                 updateNextAndPreviousButtons();
-                updateJokeText(previousJokes.get(currentDisplayedJokePosition).getJokeText());
+                updateJokeText(previousJokes.get(currentDisplayedJokePosition));
             } else {
                 fetchRandomJoke();
             }
         }
     }
 
-    private void updateJokeText(String joke) {
-        txtJoke.setText("“" + joke + "“");
+    private void updateJokeText(JokeResponseModel joke) {
+        if (joke != null && !TextUtils.isEmpty(joke.getJokeText())) {
+            if (!TextUtils.isEmpty(joke.getCategory())) {
+                txtJokeCategory.setText(getString(R.string.category) + ": " + joke.getCategory());
+                txtJokeCategory.setVisibility(View.VISIBLE);
+            } else {
+                txtJokeCategory.setVisibility(View.GONE);
+            }
+
+            txtJoke.setText("“" + joke.getJokeText() + "“");
+        }
     }
 
     private void fetchRandomJoke() {
         loadingProgressBar.start();
-        new JokeRequests(getContext()).getRandomJoke(new ServiceCallback<JokeResponseModel>() {
+        new JokeRequests(getContext()).getRandomJoke(chosenCategory, new ServiceCallback<JokeResponseModel>() {
             @Override
             public void success(JokeResponseModel responseModel, String rawJsonResponse,
                                 Call<JokeResponseModel> callRetrofit, Response<JokeResponseModel> responseRetrofit) {
@@ -156,7 +171,7 @@ public class RandomJokeFragment extends BaseFragment {
                     currentDisplayedJokePosition = previousJokes.size() - 1;
                     updateNextAndPreviousButtons();
 
-                    updateJokeText(responseModel.getJokeText());
+                    updateJokeText(responseModel);
                 }
             }
 
