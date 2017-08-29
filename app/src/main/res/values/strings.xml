@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ChuckNorrisJokes</string>
+    <string name="typeSomeText">Type some text...</string>
+    <string name="randomJoke">Random joke</string>
+    <string name="categories">Categories</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+</resources>
