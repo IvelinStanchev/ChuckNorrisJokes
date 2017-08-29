@@ -3,7 +3,6 @@ package com.chucknorrisjokes.istanchev.chucknorrisjokes.activities;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -40,14 +39,7 @@ public class BaseActivity extends AppCompatActivity {
         transaction.replace(container, fragment, tag);
         transaction.commit();
     }
-
-    public void replaceFragmentWithArguments(Fragment fragment, String tag, int container, Bundle arguments) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        fragment.setArguments(arguments);
-        transaction.replace(container, fragment, tag);
-        transaction.commit();
-    }
-
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
