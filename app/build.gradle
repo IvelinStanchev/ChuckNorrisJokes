@@ -12,7 +12,14 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField("String", "baseUrl", '"https://api.chucknorris.io/"')
+
+            debuggable true
+        }
+
         release {
+            buildConfigField("String", "baseUrl", '"https://api.chucknorris.io/"')
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -37,4 +44,11 @@ dependencies {
 
     /* Progress bar */
     compile 'com.victor:lib:1.0.4'
+
+    /* Retrofit */
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    /* Toasts */
+    compile 'com.github.johnpersano:supertoasts:2.0'
 }
