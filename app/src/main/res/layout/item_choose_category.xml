@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        fontPath="fonts/ComicSansMSFont.ttf"
+        android:id="@+id/txt_item_choose_category_category_name"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="30dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/darkGray"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="24sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/midGrayColor"
+        android:layout_below="@+id/txt_item_choose_category_category_name" />
+
+</RelativeLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="darkGray">#4E4E4E</color>
+    <color name="jokeColor">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bordersGray">#979797</color>
+    <color name="lightGrayBackground">#F2F1F1</color>
+    <color name="midGrayColor">#D8D8D8</color>
+    <color name="statusBarColor">#D8D8D8</color>
+    <color name="toastErrorColor">#F05E5E</color>
+    <color name="toastSuccessColor">#3DF046</color>
+</resources>

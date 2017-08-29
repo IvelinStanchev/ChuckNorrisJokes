@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ChuckNorrisJokes</string>
+    <string name="typeSomeText">Type some text...</string>
+    <string name="randomJoke">Random joke</string>
+    <string name="categories">Categories</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="remove">Remove</string>
+    <string name="internetConnectionProblem">There was a problem with your internet connection. Please check it and try again :)</string>
+    <string name="serverErrorGeneral">There is a problem connecting to the server...</string>
+    <string name="category">Category</string>
+</resources>
