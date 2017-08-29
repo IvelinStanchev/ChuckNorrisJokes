@@ -7,56 +7,6 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/rl_random_joke_text_search_container"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/drawable_with_borders_light_gray"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="15dp"
-        android:descendantFocusability="beforeDescendants"
-        android:focusableInTouchMode="true">
-
-        <ImageView
-            android:id="@+id/img_random_joke_text_search"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:src="@drawable/search_icon_static"
-            android:layout_alignParentRight="true"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"/>
-
-        <View
-            android:id="@+id/random_joke_text_search_separator"
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@color/bordersGray"
-            android:layout_toLeftOf="@id/img_random_joke_text_search" />
-
-        <EditText
-            fontPath="fonts/ComicSansMSFont.ttf"
-            android:id="@+id/et_random_joke_text_search"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:ems="20"
-            android:hint="@string/typeSomeText"
-            android:inputType="text"
-            android:imeOptions="actionSearch"
-            android:textColorHint="@color/midGrayColor"
-            android:textColor="@color/darkGray"
-            android:textCursorDrawable="@null"
-            android:background="@android:color/transparent"
-            android:layout_centerHorizontal="true"
-            android:layout_toLeftOf="@id/random_joke_text_search_separator"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:maxLines="1" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/rl_random_joke_chosen_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -132,7 +82,7 @@
             android:textStyle="italic" />
 
         <com.victor.loading.rotate.RotateLoading
-            android:id="@+id/friends_requests_loading_container_progress_bar"
+            android:id="@+id/random_joke_loading_container_progress_bar"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerInParent="true"

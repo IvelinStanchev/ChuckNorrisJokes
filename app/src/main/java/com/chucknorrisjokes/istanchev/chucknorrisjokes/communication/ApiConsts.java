@@ -11,5 +11,6 @@ public class ApiConsts {
     public static final String BASE_URL = BuildConfig.baseUrl;//ends with "/"
 
     //Endpoints
-    public static final String END_POINT_RANDOM_JOKE = BASE_URL + "jokes/random";
+    public static final String END_POINT_GET_RANDOM_JOKE = BASE_URL + "jokes/random";
+    public static final String END_POINT_GET_CATEGORIES = BASE_URL + "jokes/categories";
 }

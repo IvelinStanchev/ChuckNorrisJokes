@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,13 @@ public class BaseFragment extends Fragment {
     }
 
     public void setToolbarTitle(String title) {
-        getBaseActivity().setTitle(title);
+        getBaseActivity().setToolbarTitle(title);
+    }
+
+    public void showFragmentAndAddToBackStack(Fragment fragment, String name, int resContainer) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(resContainer, fragment);
+        transaction.addToBackStack(name);
+        transaction.commit();
     }
 }

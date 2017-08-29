@@ -8,9 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -20,7 +22,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class BaseActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
+    protected Toolbar toolbar;
+    protected TextView toolbarTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +35,9 @@ public class BaseActivity extends AppCompatActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-    public void replaceFragment(Fragment fragment, int container) {
+    public void replaceFragment(Fragment fragment, String tag, int container) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(container, fragment);
+        transaction.replace(container, fragment, tag);
         transaction.commit();
     }
 
@@ -45,8 +48,23 @@ public class BaseActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void setToolbar(Toolbar toolbar) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected void initToolBar(Toolbar toolbar, TextView toolbarTitle, int color) {
+        this.toolbarTitle = toolbarTitle;
         this.toolbar = toolbar;
+        this.toolbar.setTitle("");
+        setSupportActionBar(this.toolbar);
+        changeStatusBarColor(color);
+        showActionBarBackButton(true);
     }
 
     public void setToolbarVisibility(boolean shouldShow) {
@@ -60,8 +78,8 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void setToolbarTitle(String title) {
-        if (toolbar != null) {
-            toolbar.setTitle(title);
+        if (toolbarTitle != null) {
+            toolbarTitle.setText(title);
         }
     }
 
@@ -70,6 +88,17 @@ public class BaseActivity extends AppCompatActivity {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(color);
+        }
+    }
+
+    public void popBackFragment() {
+        getSupportFragmentManager().popBackStack();
+    }
+
+    public void showActionBarBackButton(boolean shouldShow) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(shouldShow);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(shouldShow);
         }
     }
 }

@@ -7,6 +7,8 @@ import com.chucknorrisjokes.istanchev.chucknorrisjokes.communication.api_models.
 import com.chucknorrisjokes.istanchev.chucknorrisjokes.communication.api_models.response_models.JokeResponseModel;
 import com.chucknorrisjokes.istanchev.chucknorrisjokes.communication.callbacks.ServiceCallback;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -28,6 +30,22 @@ public class JokeRequests {
             @Override
             public void success(JokeResponseModel responseModel, String rawJsonResponse,
                                 Call<JokeResponseModel> callRetrofit, Response<JokeResponseModel> responseRetrofit) {
+                responseCallback.success(responseModel, rawJsonResponse, callRetrofit, responseRetrofit);
+            }
+
+            @Override
+            public void failure(ErrorStatusModel error) {
+                responseCallback.failure(error);
+            }
+        });
+    }
+
+    public void getCategories(final ServiceCallback<List<String>> responseCallback){
+
+        ApiRequests.getCategories(context, new ServiceCallback<List<String>>() {
+            @Override
+            public void success(List<String> responseModel, String rawJsonResponse,
+                                Call<List<String>> callRetrofit, Response<List<String>> responseRetrofit) {
                 responseCallback.success(responseModel, rawJsonResponse, callRetrofit, responseRetrofit);
             }
 

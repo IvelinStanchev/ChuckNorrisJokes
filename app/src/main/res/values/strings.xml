@@ -8,4 +8,5 @@
     <string name="remove">Remove</string>
     <string name="internetConnectionProblem">There was a problem with your internet connection. Please check it and try again :)</string>
     <string name="serverErrorGeneral">There is a problem connecting to the server...</string>
+    <string name="category">Category</string>
 </resources>
